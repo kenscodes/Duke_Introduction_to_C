@@ -14,17 +14,49 @@ int max (int a, int b) {
   }
   return b;
 }
-
+struct rect_field{
+  int x;
+  int y;
+  int height;
+  int width;
+};
+typedef struct rect_field rectangle;
 //Declare your rectangle structure here!
-
-
 rectangle canonicalize(rectangle r) {
+  if (r.height<0 && r.width < 0)
+    {r.x = r.x + r.width;
+      r.width = (-1)*r.width;
+      r.y = r.y + r.height;
+      r.height = (-1)* r.height;}
+  else if(r.width < 0)
+    {r.x = r.x + r.width;
+      r.width = (-1)*r.width;
+    }
+  else if(r.height < 0)
+    { r.y = r.y + r.height;
+      r.height = (-1)* r.height;}
   //WRITE THIS FUNCTION
   return r;
 }
 rectangle intersection(rectangle r1, rectangle r2) {
+  rectangle inter,canor1,canor2;
+  canor1 = canonicalize(r1);
+   canor2 = canonicalize(r2);
+ if((canor1.y > (canor2.y + canor2.height))
+     ||((canor1.x + canor1.width) < canor2.x ) ||
+    ((canor1.y + canor1.height) < canor2.y) ||(canor1.x > (canor2.x + canor2.width)))
+         {inter.x = 0;
+	   inter.y = 0;
+	   inter.height = 0;
+	   inter.width = 0;} 
+  else{
+    inter.x = max(canor1.x,canor2.x);
+    inter.y = max(canor1.y,canor2.y);
+    inter.width = min((canor1.x + canor1.width),(canor2.x+canor2.width)) - inter.x;
+    inter.height = min((canor1.y + canor1.height),(canor2.y + canor2.height)) - inter.y;
+  }
   //WRITE THIS FUNCTION
-  return r1;
+  return inter;
 }
 
 //You should not need to modify any code below this line
