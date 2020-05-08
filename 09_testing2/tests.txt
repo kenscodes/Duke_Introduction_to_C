@@ -1,0 +1,14 @@
+%%&*( 01234
+NULL 00000
+AAABBB aabbcc
+12345 1234
+      b   
+aaaaa bbbbb
+aaaab bbbbc ddddd
+aabbb acbbb
+11223 112233
+aabbc lmddd
+aaaaa bbbbc
+abbbb abbbb
+
+
