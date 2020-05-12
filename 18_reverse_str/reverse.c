@@ -14,6 +14,7 @@ int string_length(char *pointer)
 }
 
 void reverse(char * s) {
+  if(s!=NULL){
   int length, c;
   char *begin, *end, temp;
   length = string_length(s);
@@ -32,7 +33,7 @@ void reverse(char * s) {
       begin++;
       end--;
     }
-  //WRITE ME!
+  }
 }
 
 
