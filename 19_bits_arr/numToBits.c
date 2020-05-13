@@ -41,14 +41,13 @@ void numToBits(uint32_t * nums, int nNums, int * bits, int nBits) {
       printf("Invalid call to numToBits! nBits is %d, nNums is %d\n",nBits,nNums);
       return; }
     
-    else{
-    for (int i=0;i<=nNums;i++)
+    
+    for (int i=0;i<nNums;i++)
       {for (int j=31;j>=0;j--)
-	  {for(int k=0;k<32;k++)
-	      { bits[i*32+k]= getNthBit(nums[i],j);}
-	    return;
+	      { bits[i*32+31-j]= getNthBit(nums[i],j);}
 	    
-	  }}}}}
+      }}
+       }
 
 void doTest(uint32_t * nums, int n) {
   int bits[n *32];
