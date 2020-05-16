@@ -37,7 +37,7 @@ int main()
      {printf("broken8 implementation");
        exit(EXIT_FAILURE);}
    
-   if(power(256, 4) != 4294967296)
+   if(power(64,3) !=262144 )
      {printf("broken10 implementation");
        exit(EXIT_FAILURE);}
 
@@ -45,7 +45,7 @@ int main()
      {printf("broken9 implementation");
        exit(EXIT_FAILURE);}
 
-   if(power(2,32 ) != 4294967296)
+   if(power(2,4 ) != 16)
      {printf("broken11 implementation");
        exit(EXIT_FAILURE);}
    return EXIT_SUCCESS;
