@@ -16,8 +16,7 @@ int card_ptr_comp(const void * vp1, const void * vp2) {
   else if ((**cp1).value < (**cp2).value) return 1;
   else if ((**cp1).suit < (**cp2).suit) return -1;
   else if ((**cp1).suit > (**cp2).suit) return 1;
-    else
-  return 0;
+  else  return 0;
 }
 
 suit_t flush_suit(deck_t * hand) {
@@ -159,20 +158,18 @@ int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
 
 
 int compare_hands(deck_t * hand1, deck_t * hand2) {
-  qsort(hand1->cards, hand1 -> n_cards, sizeof(card_t), card_ptr_comp);
-  qsort(hand2->cards, hand2 -> n_cards, sizeof(card_t), card_ptr_comp);
-
-  hand_eval_t hand11= evaluate_hand(hand1);
-  hand_eval_t hand22= evaluate_hand(hand2);
-  if (hand11.ranking < hand22.ranking) return 1;
-  else if (hand11.ranking > hand22.ranking) return -1;
-  else {
-    for (size_t i=0 ;i<5;i++){
-      card_t * card1=hand11.cards[i];
-      card_t * card2=hand22.cards[i];
-      if (card1 -> value > card2->value) return 1;
-      else if  (card1->value < card2->value) return -1;
-      else continue;
+  qsort(hand1->cards,hand1->n_cards,sizeof(hand1->cards[0]),card_ptr_comp);
+  hand_eval_t eval1=evaluate_hand(hand1);
+  qsort(hand2->cards,hand2->n_cards,sizeof(hand2->cards[0]),card_ptr_comp);
+  hand_eval_t eval2=evaluate_hand(hand2);
+  if(eval1.ranking != eval2.ranking){
+    return eval2.ranking - eval1.ranking;
+  }
+  else{
+    for(size_t i=0;i<5;i++){
+      if(eval1.cards[i]->value != eval2.cards[i]->value){
+	return eval1.cards[i]->value - eval2.cards[i]->value;
+      }
     }
   }
   return 0;
