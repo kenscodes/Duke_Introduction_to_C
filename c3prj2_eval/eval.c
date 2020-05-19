@@ -12,11 +12,15 @@ int com1(card_t c1,card_t c2){
 int card_ptr_comp(const void * vp1, const void * vp2) {
   const card_t * const * cp1=vp1;
   const card_t * const * cp2=vp2;
-  if ((**cp1).value > (**cp2).value) return -1;
-  else if ((**cp1).value < (**cp2).value) return 1;
-  else if ((**cp1).suit < (**cp2).suit) return -1;
-  else if ((**cp1).suit > (**cp2).suit) return 1;
-  else  return 0;
+  if((*cp1)->value!=(*cp2)->value){
+    return (*cp2)->value - (*cp1)->value;
+  }
+  else if((*cp1)->suit != (*cp2)->suit){
+    return (*cp2)->suit - (*cp1)->suit;
+  }
+  else{
+    return 0;
+  }
 }
 
 suit_t flush_suit(deck_t * hand) {
