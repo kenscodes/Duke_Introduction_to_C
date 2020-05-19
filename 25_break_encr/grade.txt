@@ -1,5 +1,15 @@
-Grading at Tue May 19 16:45:35 UTC 2020
+Grading at Tue May 19 16:47:45 UTC 2020
 Attempting to compile breaker.c 
-The code did not compile!
+gcc -o breaker breaker.c
+testcase1 passed
+#################################################
+testcase2:
+testcase2 passed
+#################################################
+testcase3:
+testcase3 passed
+#################################################
+testcase4:
+testcase4 passed
 
-Overall Grade: F
+Overall Grade: A
