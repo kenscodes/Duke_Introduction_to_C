@@ -1,0 +1,11 @@
+0_test.txt
+1_test.txt
+2_test.txt
+3_test.txt
+4_test.txt
+5_test.txt
+6_test.txt
+EOF
+
+1 2 3 4 5 6
+this_file_does_not_exist.txt
