@@ -8,40 +8,6 @@
 #include "deck.h"
 #include "cards.h"
 
-size_t strToInt(char * str){
-  size_t len = strlen(str);
-  size_t res = 0;
-  size_t delta = 0;
-  for(size_t i=0; i<len; i++){
-    delta = str[i] - '0';
-    for(size_t j=0; j<len-i-1; j++){
-      delta = delta * 10;
-    }
-    res = res + delta;
-  }
-  return res;
-}
-
-void lineToStr(char * line){
-  size_t len = strlen(line);
-  if(line[len-1] == '\n'){
-    line[len-1] = '\0';
-  }
-}
-
-int getLastIndex(const char * str, int fstIdx){
-  char c = str[fstIdx];
-  int count = 0;
-  while(isalpha(c) || isdigit(c) || (c=='?')){
-    count++;
-    c = str[fstIdx + count];
-  }
-  if(count <=1 ){
-    return -1;
-  }
-  return fstIdx+count;
-}
-
 
 deck_t * hand_from_string(const char * str, future_cards_t * fc){
   deck_t *ans=malloc(sizeof(*ans));
