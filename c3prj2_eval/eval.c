@@ -192,7 +192,7 @@ unsigned * get_match_counts(deck_t * hand);// {
 //assert(ans!=NULL);
 //for(size_t i=0;i<hand->n_cards;i++){
 //  ans[i]=0;
-  }
+//  }
 //for(size_t i=0;i<hand->n_cards;i++){
 //  for(size_t j=0;j<hand->n_cards;j++){
 //    if(hand->cards[i]->value==hand->cards[j]->value){
