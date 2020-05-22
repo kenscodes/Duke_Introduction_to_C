@@ -1,4 +1,4 @@
-Grading at Thu May 21 07:06:32 UTC 2020
+Grading at Fri May 22 07:07:12 UTC 2020
 Attempting to compile minesweeper.c
 #################################################
 testcase1:
