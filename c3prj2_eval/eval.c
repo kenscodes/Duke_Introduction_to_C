@@ -12,15 +12,11 @@ int com1(card_t c1,card_t c2){
 int card_ptr_comp(const void * vp1, const void * vp2) {
   const card_t * const * cp1=vp1;
   const card_t * const * cp2=vp2;
-  if((*cp1)->value!=(*cp2)->value){
-    return (*cp2)->value - (*cp1)->value;
-  }
-  else if((*cp1)->suit != (*cp2)->suit){
-    return (*cp2)->suit - (*cp1)->suit;
-  }
-  else{
-    return 0;
-  }
+  if ((**cp1).value > (**cp2).value) return -1;
+  else if ((**cp1).value < (**cp2).value) return 1;
+  else if ((**cp1).suit < (**cp2).suit) return -1;
+  else if ((**cp1).suit > (**cp2).suit) return 1;
+  else return 0;
 }
 
 suit_t flush_suit(deck_t * hand) {
@@ -162,18 +158,24 @@ int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
 
 
 int compare_hands(deck_t * hand1, deck_t * hand2) {
-  qsort(hand1->cards,hand1->n_cards,sizeof(hand1->cards[0]),card_ptr_comp);
+  qsort(hand1->cards,hand1->n_cards,sizeof(card_t),card_ptr_comp);
   hand_eval_t eval1=evaluate_hand(hand1);
-  qsort(hand2->cards,hand2->n_cards,sizeof(hand2->cards[0]),card_ptr_comp);
+  qsort(hand2->cards,hand2->n_cards,sizeof(card_t),card_ptr_comp);
   hand_eval_t eval2=evaluate_hand(hand2);
-  if(eval1.ranking != eval2.ranking){
-    return eval2.ranking - eval1.ranking;
-  }
+  if(eval1.ranking < eval2.ranking)
+    return 1;
+  else if(eval1.ranking > eval2.ranking)
+    return -1;
+  
   else{
     for(size_t i=0;i<5;i++){
-      if(eval1.cards[i]->value != eval2.cards[i]->value){
-	return eval1.cards[i]->value - eval2.cards[i]->value;
-      }
+      card_t * card1=eval1.cards[i];
+      card_t * card2=eval2.cards[i];
+      if (card1 -> value > card2->value) return 1;
+      else if  (card1->value < card2->value) return -1;
+      else continue;
+  
+      
     }
   }
   return 0;
@@ -186,22 +188,19 @@ int compare_hands(deck_t * hand1, deck_t * hand2) {
 //implementation in eval-c4.o) so that the
 //other functions we have provided can make
 //use of get_match_counts.
-unsigned * get_match_counts(deck_t * hand);// {
+unsigned * get_match_counts(deck_t * hand) {
+  unsigned* arr=malloc(hand->n_cards*sizeof(*arr));
+  //  assert(arr!=NULL);
+  for(int i=0 ; i< hand->n_cards ; i++){
+    card_t x = *(hand->cards[i]);
+    unsigned  count=0;
+    for(int j=0 ; j< hand->n_cards;j++){
+      if(com1(*(hand->cards[j]),x)) count ++;
+    }
+    arr[i] = count;}
+  return arr;
 
-//unsigned *ans=malloc(hand->n_cards*sizeof(*ans));
-//assert(ans!=NULL);
-//for(size_t i=0;i<hand->n_cards;i++){
-//  ans[i]=0;
-//  }
-//for(size_t i=0;i<hand->n_cards;i++){
-//  for(size_t j=0;j<hand->n_cards;j++){
-//    if(hand->cards[i]->value==hand->cards[j]->value){
-//	ans[j]++;
-//    }
-//  }
-//}
-//return ans;
-//}
+}
 
   
 // We provide the below functions.  You do NOT need to modify them
